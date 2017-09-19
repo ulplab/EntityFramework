@@ -1,6 +1,6 @@
 ﻿namespace ProductoCRUD
 {
-    partial class frmProducto
+    partial class frmProductos
     {
         /// <summary>
         /// Required designer variable.
@@ -43,7 +43,10 @@
             this.tbCosto = new System.Windows.Forms.TextBox();
             this.tbUtilidad = new System.Windows.Forms.TextBox();
             this.lblUtilidad = new System.Windows.Forms.Label();
+            this.lblCategoria = new System.Windows.Forms.Label();
+            this.cboCategorias = new System.Windows.Forms.ComboBox();
             this.ProductId = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Categoria = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Costo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.CoefUtil = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -59,6 +62,7 @@
             this.btnBuscar.TabIndex = 21;
             this.btnBuscar.Text = "Buscar";
             this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
             // 
             // tbBuscar
             // 
@@ -84,11 +88,12 @@
             this.dgvProductos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProductos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.ProductId,
+            this.Categoria,
             this.Nombre,
             this.Costo,
             this.CoefUtil,
             this.Estado});
-            this.dgvProductos.Location = new System.Drawing.Point(12, 168);
+            this.dgvProductos.Location = new System.Drawing.Point(13, 207);
             this.dgvProductos.Name = "dgvProductos";
             this.dgvProductos.ReadOnly = true;
             this.dgvProductos.Size = new System.Drawing.Size(383, 150);
@@ -96,12 +101,13 @@
             // 
             // btnListar
             // 
-            this.btnListar.Location = new System.Drawing.Point(251, 123);
+            this.btnListar.Location = new System.Drawing.Point(252, 162);
             this.btnListar.Name = "btnListar";
             this.btnListar.Size = new System.Drawing.Size(144, 23);
             this.btnListar.TabIndex = 17;
             this.btnListar.Text = "Listar";
             this.btnListar.UseVisualStyleBackColor = true;
+            this.btnListar.Click += new System.EventHandler(this.btnListar_Click);
             // 
             // tbDescripcion
             // 
@@ -134,7 +140,7 @@
             // 
             // btnBorrar
             // 
-            this.btnBorrar.Location = new System.Drawing.Point(170, 123);
+            this.btnBorrar.Location = new System.Drawing.Point(171, 162);
             this.btnBorrar.Name = "btnBorrar";
             this.btnBorrar.Size = new System.Drawing.Size(72, 23);
             this.btnBorrar.TabIndex = 13;
@@ -143,7 +149,7 @@
             // 
             // btnActualizar
             // 
-            this.btnActualizar.Location = new System.Drawing.Point(91, 123);
+            this.btnActualizar.Location = new System.Drawing.Point(92, 162);
             this.btnActualizar.Name = "btnActualizar";
             this.btnActualizar.Size = new System.Drawing.Size(73, 23);
             this.btnActualizar.TabIndex = 12;
@@ -152,17 +158,18 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(12, 122);
+            this.btnAgregar.Location = new System.Drawing.Point(13, 161);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(71, 25);
             this.btnAgregar.TabIndex = 11;
             this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
+            this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // lblCosto
             // 
             this.lblCosto.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCosto.Location = new System.Drawing.Point(13, 81);
+            this.lblCosto.Location = new System.Drawing.Point(14, 120);
             this.lblCosto.Name = "lblCosto";
             this.lblCosto.Size = new System.Drawing.Size(75, 23);
             this.lblCosto.TabIndex = 22;
@@ -171,14 +178,14 @@
             // 
             // tbCosto
             // 
-            this.tbCosto.Location = new System.Drawing.Point(94, 81);
+            this.tbCosto.Location = new System.Drawing.Point(95, 120);
             this.tbCosto.Name = "tbCosto";
             this.tbCosto.Size = new System.Drawing.Size(147, 20);
             this.tbCosto.TabIndex = 23;
             // 
             // tbUtilidad
             // 
-            this.tbUtilidad.Location = new System.Drawing.Point(328, 81);
+            this.tbUtilidad.Location = new System.Drawing.Point(329, 120);
             this.tbUtilidad.Name = "tbUtilidad";
             this.tbUtilidad.Size = new System.Drawing.Size(65, 20);
             this.tbUtilidad.TabIndex = 25;
@@ -186,12 +193,31 @@
             // lblUtilidad
             // 
             this.lblUtilidad.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblUtilidad.Location = new System.Drawing.Point(247, 81);
+            this.lblUtilidad.Location = new System.Drawing.Point(248, 120);
             this.lblUtilidad.Name = "lblUtilidad";
             this.lblUtilidad.Size = new System.Drawing.Size(75, 23);
             this.lblUtilidad.TabIndex = 24;
             this.lblUtilidad.Text = "Utilidad";
             this.lblUtilidad.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // lblCategoria
+            // 
+            this.lblCategoria.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCategoria.Location = new System.Drawing.Point(13, 83);
+            this.lblCategoria.Name = "lblCategoria";
+            this.lblCategoria.Size = new System.Drawing.Size(75, 23);
+            this.lblCategoria.TabIndex = 26;
+            this.lblCategoria.Text = "Categoría";
+            this.lblCategoria.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            // 
+            // cboCategorias
+            // 
+            this.cboCategorias.FormattingEnabled = true;
+            this.cboCategorias.Location = new System.Drawing.Point(94, 83);
+            this.cboCategorias.Name = "cboCategorias";
+            this.cboCategorias.Size = new System.Drawing.Size(299, 21);
+            this.cboCategorias.TabIndex = 27;
+            this.cboCategorias.SelectedIndexChanged += new System.EventHandler(this.cboCategorias_SelectedIndexChanged);
             // 
             // ProductId
             // 
@@ -202,10 +228,17 @@
             this.ProductId.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.ProductId.Width = 30;
             // 
+            // Categoria
+            // 
+            this.Categoria.DataPropertyName = "Categoria";
+            this.Categoria.HeaderText = "Categoría";
+            this.Categoria.Name = "Categoria";
+            this.Categoria.ReadOnly = true;
+            // 
             // Nombre
             // 
             this.Nombre.DataPropertyName = "Descripcion";
-            this.Nombre.HeaderText = "Descripcion";
+            this.Nombre.HeaderText = "Descripción";
             this.Nombre.Name = "Nombre";
             this.Nombre.ReadOnly = true;
             // 
@@ -232,11 +265,13 @@
             this.Estado.Name = "Estado";
             this.Estado.ReadOnly = true;
             // 
-            // frmProducto
+            // frmProductos
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(420, 330);
+            this.ClientSize = new System.Drawing.Size(409, 405);
+            this.Controls.Add(this.cboCategorias);
+            this.Controls.Add(this.lblCategoria);
             this.Controls.Add(this.tbUtilidad);
             this.Controls.Add(this.lblUtilidad);
             this.Controls.Add(this.tbCosto);
@@ -252,7 +287,7 @@
             this.Controls.Add(this.btnBorrar);
             this.Controls.Add(this.btnActualizar);
             this.Controls.Add(this.btnAgregar);
-            this.Name = "frmProducto";
+            this.Name = "frmProductos";
             this.Text = "Producto";
             this.Load += new System.EventHandler(this.frmProducto_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProductos)).EndInit();
@@ -278,7 +313,10 @@
         private System.Windows.Forms.TextBox tbCosto;
         private System.Windows.Forms.TextBox tbUtilidad;
         private System.Windows.Forms.Label lblUtilidad;
+        private System.Windows.Forms.Label lblCategoria;
+        private System.Windows.Forms.ComboBox cboCategorias;
         private System.Windows.Forms.DataGridViewTextBoxColumn ProductId;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Categoria;
         private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
         private System.Windows.Forms.DataGridViewTextBoxColumn Costo;
         private System.Windows.Forms.DataGridViewTextBoxColumn CoefUtil;

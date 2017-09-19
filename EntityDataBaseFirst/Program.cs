@@ -16,7 +16,7 @@ namespace EntityDataBaseFirst
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frmEmpresa());
+            Application.Run(new frmCategorías());
         }
     }
 }
