@@ -108,7 +108,7 @@ namespace ProductoCRUD
                     MessageBox.Show("El producto no se encontró.");
                 }
                 else {
-                    cboCategorias.SelectedIndex = cboCategorias.FindStringExact(producto.Categoria.Nombre);
+                    cboCategorias.SelectedValue = producto.Categoria.CategoriaId;
                     tbDescripcion.Text = producto.Descripcion;
                     tbUtilidad.Text = producto.CoefUtil.ToString();
                     tbCosto.Text = producto.Costo.ToString();
