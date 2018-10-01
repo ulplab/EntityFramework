@@ -73,6 +73,8 @@ namespace CategoriaCRUD
                 //Opcion 2: Buscar la entidad por ID y luego borrarla
                 Categoria categoria2 = db.Categoria.FirstOrDefault(cat => cat.CategoriaId == categoria.CategoriaId);
 
+                //List<Categoria> categoria3 = db.Categoria.Where(cat => cat.CategoriaId == 1).ToList();
+
                 db.Categoria.Remove(categoria2);
                 db.SaveChanges();
                 Listar();
@@ -86,13 +88,13 @@ namespace CategoriaCRUD
                 Categoria categoria = (Categoria)dgvCategorias.CurrentRow.DataBoundItem;
 
                 //Opcion 1: Ajuntar la entidad a este DbContext porque la misma fue cargada por una instancia diferente de EmpresaDB
-                //db.Categoria.Attach(categoria);
+                db.Categoria.Attach(categoria);
 
                 //Opcion 2: Buscar la entidad por ID y luego borrarla
-                Categoria categoria2 = db.Categoria.FirstOrDefault(cat => cat.CategoriaId == categoria.CategoriaId);
+                //Categoria categoria2 = db.Categoria.FirstOrDefault(cat => cat.CategoriaId == categoria.CategoriaId);
 
-                categoria2.Nombre = tbNombre.Text;
-                categoria2.Estado = cbEstado.Checked;
+                categoria.Nombre = tbNombre.Text;
+                categoria.Estado = cbEstado.Checked;
                 db.SaveChanges();
                 Listar();
             }

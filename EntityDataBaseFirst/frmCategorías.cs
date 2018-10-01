@@ -53,10 +53,10 @@ namespace EntityDataBaseFirst
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             db.SaveChanges();
-            var q = db.Categoria;
-            Categoria c1 = db.Categoria.FirstOrDefault(cat => cat.CategoriaId == 17);
-                //from cat in db.Categoria where cat.CategoriaId == 17 select cat;
-            c1.Nombre = "Juana";
+            //var q = db.Categoria;
+            //Categoria c1 = db.Categoria.FirstOrDefault(cat => cat.CategoriaId == 17);
+            //    //from cat in db.Categoria where cat.CategoriaId == 17 select cat;
+            //c1.Nombre = "Juana";
             
 
         }

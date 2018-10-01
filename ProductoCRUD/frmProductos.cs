@@ -22,7 +22,7 @@ namespace ProductoCRUD
         {
             using (EmpresaDB db = new EmpresaDB())
             {
-                List<Categoria> categorias = (db.Categoria).ToList();
+                List<Categoria> categorias = db.Categoria.ToList();
 
                 cboCategorias.DisplayMember = "Nombre";
                 cboCategorias.ValueMember = "CategoriaId";
@@ -58,7 +58,36 @@ namespace ProductoCRUD
                                                   Costo = prods.Costo,
                                                   Estado = prods.Estado
                                               }).ToList();
-                dgvProductos.DataSource = lista;
+
+
+                List<ListaProductos> lista2 = db.Producto.Join(db.Categoria,
+                    prod => prod.CategoriaId,
+                    cat => cat.CategoriaId,
+                    (prod, cat) => new { prod, cat }).Select(pc => new ListaProductos()
+                    {
+                        ProductoId = pc.prod.ProductoId,
+                        IdCategoria = pc.cat.CategoriaId,
+                        Descripcion = pc.prod.Descripcion,
+                        Categoria = pc.cat.Nombre,
+                        CoefUtil = pc.prod.CoefUtil,
+                        Costo = pc.prod.Costo,
+                        Estado = pc.prod.Estado
+
+                    }).ToList();
+
+                List<ListaProductos> lista3 = db.Producto.Select(p => new ListaProductos()
+                {
+                    ProductoId = p.ProductoId,
+                    IdCategoria = p.Categoria.CategoriaId,
+                    Descripcion = p.Descripcion,
+                    Categoria = p.Categoria.Nombre,
+                    CoefUtil = p.CoefUtil,
+                    Costo = p.Costo,
+                    Estado = p.Estado
+
+                }).ToList();
+
+                dgvProductos.DataSource = lista3;
             }
         }
 
@@ -74,11 +103,12 @@ namespace ProductoCRUD
             using (EmpresaDB db = new EmpresaDB())
             {
                 int id = (int)cboCategorias.SelectedValue;
-                Categoria categoria = db.Categoria.Where(c => c.CategoriaId == id).FirstOrDefault();
+                //Categoria categoria = db.Categoria.Where(c => c.CategoriaId == id).FirstOrDefault();
 
                 Producto produco = new Producto()
                 {
-                    Categoria = categoria,
+                    //Categoria = categoria,
+                    CategoriaId = id,
                     Descripcion = tbDescripcion.Text,
                     CoefUtil = decimal.Parse(tbUtilidad.Text),
                     Costo = decimal.Parse(tbCosto.Text),
@@ -102,7 +132,7 @@ namespace ProductoCRUD
         {
             using (EmpresaDB db = new EmpresaDB()) {
                 int id = Int32.Parse(tbBuscar.Text);
-                Producto producto = db.Producto.Where(p => p.ProductoId == id).FirstOrDefault();
+                Producto producto = db.Producto.FirstOrDefault(p => p.ProductoId == id);
                 if (producto == null)
                 {
                     MessageBox.Show("El producto no se encontró.");

@@ -16,7 +16,7 @@ namespace EntityDataBaseFirst
     public partial class EmpresaDB : DbContext
     {
         public EmpresaDB()
-            : base("name=EmpresaDB")
+            : base("name=ef5demoEntities")
         {
         }
     
