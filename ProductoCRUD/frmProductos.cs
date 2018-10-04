@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,11 @@ using System.Windows.Forms;
 
 namespace ProductoCRUD
 {
+    class Informe {
+        public string Categoria { get; set; }
+        public int Cant { get; set; }
+    }
+
     public partial class frmProductos : Form
     {
         public frmProductos()
@@ -75,6 +81,7 @@ namespace ProductoCRUD
 
                     }).ToList();
 
+                
                 List<ListaProductos> lista3 = db.Producto.Select(p => new ListaProductos()
                 {
                     ProductoId = p.ProductoId,
@@ -86,6 +93,22 @@ namespace ProductoCRUD
                     Estado = p.Estado
 
                 }).ToList();
+
+
+                var cats = db.Categoria.SqlQuery("select * from categoria where CategoriaId = @ident"
+                    , new SqlParameter("@ident",3)).FirstOrDefault();
+
+                var cat2 = db.Database.SqlQuery<Categoria>("select * from " +
+                    "categoria where CategoriaId = @catid"
+                    ,new SqlParameter("@catid", 1)).FirstOrDefault();
+
+
+                string sql = "select c.Nombre as Categoria,count(*) as Cant " +
+                    "from producto p join categoria c on " +
+                    "p.categoriaid = c.categoriaid group by c.Nombre";
+
+
+                var informe = db.Database.SqlQuery<Informe>(sql).ToList();
 
                 dgvProductos.DataSource = lista3;
             }
